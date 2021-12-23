@@ -1,4 +1,4 @@
-export const initialEquipmentList = [
+const initialEquipmentList = [
   {
     name: 'Stethoscope',
     fullQuantity: 2,
@@ -35,3 +35,5 @@ export const initialEquipmentList = [
     currentQuantity: 0,
   },
 ]
+
+export default initialEquipmentList

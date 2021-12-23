@@ -19,3 +19,9 @@ export const checklistSlice = createSlice({
     },
   },
 })
+
+export const selectChecklist = (state) => state
+
+export const { changeQuantity, addNewItem } = checklistSlice.actions
+
+export default checklistSlice.reducer
