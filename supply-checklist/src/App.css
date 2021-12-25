@@ -37,3 +37,13 @@
     transform: translateY(0px);
   }
 }
+
+.item-card {
+  display: flex;
+  justify-content: center;
+  border: 1px solid black;
+}
+
+.item-card p {
+  margin: 1rem;
+}

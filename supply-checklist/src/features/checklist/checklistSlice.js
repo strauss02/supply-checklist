@@ -17,11 +17,21 @@ export const checklistSlice = createSlice({
     addNewItem: (state, action) => {
       state.equipment.push(action.payload)
     },
+    removeItem: (state, action) => {
+      console.log(
+        state.equipment.map((item) => {
+          console.log(action.payload.name === item.name)
+          if (action.payload.name === item.name) {
+            return { haha: 'baha' }
+          } else return item
+        })
+      )
+    },
   },
 })
 
 export const selectChecklist = (state) => state
 
-export const { changeQuantity, addNewItem } = checklistSlice.actions
+export const { changeQuantity, addNewItem, removeItem } = checklistSlice.actions
 
 export default checklistSlice.reducer
