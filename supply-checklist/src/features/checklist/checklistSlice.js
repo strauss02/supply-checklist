@@ -18,13 +18,8 @@ export const checklistSlice = createSlice({
       state.equipment.push(action.payload)
     },
     removeItem: (state, action) => {
-      console.log(
-        state.equipment.map((item) => {
-          console.log(action.payload.name === item.name)
-          if (action.payload.name === item.name) {
-            return { haha: 'baha' }
-          } else return item
-        })
+      state.equipment = state.equipment.filter(
+        (item) => action.payload.name !== item.name
       )
     },
   },

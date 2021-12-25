@@ -3,19 +3,35 @@ import { useDispatch } from 'react-redux'
 import { addNewItem } from './checklistSlice'
 
 function AddItemForm(props) {
+  const assertItemIsValid = (item) => {
+    if (
+      item.fullQuantity <= 0 ||
+      item.name === '' ||
+      item.currentQuantity == 0
+    ) {
+      throw new Error(`whoa... Something ain't right with your item!`)
+    } else setErrorMessage('')
+  }
   const disptach = useDispatch()
 
   const newItemTemplate = {
     name: '',
-    currentQuantity: 0,
-    fullQuantity: 0,
+    currentQuantity: '0',
+    fullQuantity: '0',
     isCustom: true,
   }
 
   const [newItem, setNewItem] = useState(newItemTemplate)
 
+  const [errorMessage, setErrorMessage] = useState('')
+
   function handleAddNewItem(e) {
-    disptach(addNewItem(newItem))
+    try {
+      assertItemIsValid(newItem)
+      disptach(addNewItem(newItem))
+    } catch (error) {
+      setErrorMessage(error.message)
+    }
   }
 
   function handleNewItemInputChange(e) {
@@ -52,6 +68,7 @@ function AddItemForm(props) {
         max={newItem.fullQuantity}
       />
       <button onClick={handleAddNewItem}> Add it!</button>
+      {errorMessage ? <div> {errorMessage}</div> : ''}
     </div>
   )
 }
