@@ -1,8 +1,12 @@
 import { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { changeMessage, changeVisibility } from '../alert/alertSlice'
 import { addNewItem } from './checklistSlice'
 
 function AddItemForm(props) {
+  const alertState = useSelector((state) => state.alert)
+  const dispatch = useDispatch()
+
   const assertItemIsValid = (item) => {
     if (
       item.fullQuantity <= 0 ||
@@ -10,9 +14,8 @@ function AddItemForm(props) {
       item.currentQuantity == 0
     ) {
       throw new Error(`whoa... Something ain't right with your item!`)
-    } else setErrorMessage('')
+    } else dispatch(changeMessage(''))
   }
-  const disptach = useDispatch()
 
   const newItemTemplate = {
     name: '',
@@ -23,14 +26,13 @@ function AddItemForm(props) {
 
   const [newItem, setNewItem] = useState(newItemTemplate)
 
-  const [errorMessage, setErrorMessage] = useState('')
-
   function handleAddNewItem(e) {
     try {
       assertItemIsValid(newItem)
-      disptach(addNewItem(newItem))
+      dispatch(addNewItem(newItem))
     } catch (error) {
-      setErrorMessage(error.message)
+      dispatch(changeMessage(error.message))
+      dispatch(changeVisibility(true))
     }
   }
 
@@ -68,7 +70,6 @@ function AddItemForm(props) {
         max={newItem.fullQuantity}
       />
       <button onClick={handleAddNewItem}> Add it!</button>
-      {errorMessage ? <div> {errorMessage}</div> : ''}
     </div>
   )
 }

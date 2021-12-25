@@ -6,6 +6,7 @@ import AddItemForm from './features/checklist/AddItemForm'
 import UserForm from './features/user/UserForm'
 import { changeMessage, changeVisibility } from './features/alert/alertSlice'
 import Alert from './features/alert/Alert'
+import Signature from './features/singature/Signature'
 
 function App() {
   const equipmentState = useSelector((state) => state.checklist)
@@ -26,11 +27,10 @@ function App() {
     try {
       validateForm()
       dispatch(changeVisibility(true))
-      dispatch(changeMessage('horay'))
+      dispatch(changeMessage('hooray! form is complete.'))
     } catch (error) {
-      console.log('from is BAD')
       dispatch(changeVisibility(true))
-      dispatch(changeMessage('fuck'))
+      dispatch(changeMessage(`something's wrong with your user details...`))
     }
   }
 
@@ -52,6 +52,7 @@ function App() {
         })}
       </div>
       <AddItemForm />
+      <Signature />
       <button onClick={handleFormSubmit}>Submit Checklist!</button>
       <Alert />
     </div>

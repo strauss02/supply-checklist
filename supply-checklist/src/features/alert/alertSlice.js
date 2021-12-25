@@ -7,7 +7,7 @@ export const alertSlice = createSlice({
   initialState,
   reducers: {
     changeVisibility: (state, action) => {
-      state.message = action.payload
+      state.isVisible = action.payload
     },
     changeMessage: (state, action) => {
       state.message = action.payload

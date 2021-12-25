@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { changeQuantity, removeItem } from './checklistSlice'
+import { Button, Typography } from '@material-ui/core'
 
 function ItemCard({ currentQuantity, fullQuantity, name, isCustom }) {
   const equipmentState = useSelector((state) => state.equipment)
@@ -19,9 +20,9 @@ function ItemCard({ currentQuantity, fullQuantity, name, isCustom }) {
 
   return (
     <div className="item-card">
-      <p> {name}</p>
-      <p> full quantity: {fullQuantity}</p>
-      <p>
+      <Typography> {name}</Typography>
+      <Typography> full quantity: {fullQuantity}</Typography>
+      <Typography>
         {' '}
         current quantity:
         <input
@@ -31,9 +32,22 @@ function ItemCard({ currentQuantity, fullQuantity, name, isCustom }) {
           min="0"
           max={fullQuantity}
         />
-      </p>
-      <p> quantity missing : {fullQuantity - currentQuantity}</p>
-      {isCustom ? <button onClick={handleRemoveClick}>remove</button> : ''}
+      </Typography>
+      <Typography>
+        {' '}
+        quantity missing : {fullQuantity - currentQuantity}
+      </Typography>
+      {isCustom ? (
+        <Button
+          color="secondary"
+          variant="outlined"
+          onClick={handleRemoveClick}
+        >
+          remove
+        </Button>
+      ) : (
+        ''
+      )}
     </div>
   )
 }
