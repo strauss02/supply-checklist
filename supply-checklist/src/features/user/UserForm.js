@@ -1,12 +1,13 @@
 import { useDispatch, useSelector } from 'react-redux'
+import { useState } from 'react'
 import { changeCredentials } from './userSlice'
 
 function UserForm(props) {
   const userState = useSelector((state) => state)
   const dispatch = useDispatch()
+  const [errorMessage, setErrorMessage] = useState('')
 
   function handleCredentialChange(e) {
-    console.log(e)
     dispatch(
       changeCredentials({ property: e.target.name, value: e.target.value })
     )
@@ -16,14 +17,28 @@ function UserForm(props) {
     <div>
       <form onChange={handleCredentialChange}>
         <label htmlFor="user-input-first-name">First name: </label>
-        <input name="firstName" id="user-input-first-name" />
+        <input
+          value={userState.firstName}
+          name="firstName"
+          id="user-input-first-name"
+        />
 
         <label htmlFor="user-input-last-name">Last name: </label>
-        <input name="lastName" id="user-input-last-name" />
+        <input
+          value={userState.lastName}
+          name="lastName"
+          id="user-input-last-name"
+        />
 
         <label htmlFor="user-input-date">date: </label>
-        <input type="date" name="date" id="user-input-date" />
+        <input
+          value={userState.date}
+          type="date"
+          name="date"
+          id="user-input-date"
+        />
       </form>
+      {errorMessage ? <div> {errorMessage}</div> : ''}
     </div>
   )
 }
