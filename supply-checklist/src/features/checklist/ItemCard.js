@@ -1,10 +1,11 @@
 import { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { changeQuantity, removeItem } from './checklistSlice'
 import { Button, Typography } from '@material-ui/core'
+import Card from '@mui/material/Card'
+import CardContent from '@mui/material/CardContent'
 
 function ItemCard({ currentQuantity, fullQuantity, name, isCustom }) {
-  const equipmentState = useSelector((state) => state.equipment)
   const dispatch = useDispatch()
 
   const [quantityInputValue, setQuantityInputValue] = useState(currentQuantity)
@@ -19,36 +20,43 @@ function ItemCard({ currentQuantity, fullQuantity, name, isCustom }) {
   }
 
   return (
-    <div className="item-card">
-      <Typography> {name}</Typography>
-      <Typography> full quantity: {fullQuantity}</Typography>
-      <Typography>
-        {' '}
-        current quantity:
-        <input
-          type="number"
-          onChange={handleCurrentQuantityChange}
-          value={quantityInputValue}
-          min="0"
-          max={fullQuantity}
-        />
-      </Typography>
-      <Typography>
-        {' '}
-        quantity missing : {fullQuantity - currentQuantity}
-      </Typography>
-      {isCustom ? (
-        <Button
-          color="secondary"
-          variant="outlined"
-          onClick={handleRemoveClick}
-        >
-          remove
-        </Button>
-      ) : (
-        ''
-      )}
-    </div>
+    <Card sx={{ m: 2 }}>
+      <CardContent>
+        <div className="item-card">
+          <Typography variant="h5"> {name}</Typography>
+          <Typography variant="body2">
+            {' '}
+            full quantity: {fullQuantity}
+          </Typography>
+          <Typography variant="body2">
+            {' '}
+            current quantity:
+            <input
+              type="number"
+              onChange={handleCurrentQuantityChange}
+              value={quantityInputValue}
+              min="0"
+              max={fullQuantity}
+            />
+          </Typography>
+          <Typography variant="body2">
+            {' '}
+            quantity missing : {fullQuantity - currentQuantity}
+          </Typography>
+          {isCustom ? (
+            <Button
+              color="primary"
+              variant="outlined"
+              onClick={handleRemoveClick}
+            >
+              remove
+            </Button>
+          ) : (
+            ''
+          )}
+        </div>
+      </CardContent>
+    </Card>
   )
 }
 

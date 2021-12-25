@@ -40,8 +40,8 @@
 
 .item-card {
   display: flex;
-  justify-content: center;
-  border: 1px solid black;
+  justify-content: space-around;
+  align-items: center;
 }
 
 .item-card p {
@@ -50,5 +50,9 @@
 
 .signature {
   border: 3px solid gray;
-  border-bottom: 3px solid black;
+  border-radius: 2rem;
+}
+
+.user-form {
+  margin: 2rem;
 }

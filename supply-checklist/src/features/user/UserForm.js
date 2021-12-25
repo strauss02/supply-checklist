@@ -5,6 +5,7 @@ import { changeCredentials } from './userSlice'
 function UserForm(props) {
   const userState = useSelector((state) => state)
   const dispatch = useDispatch()
+  // eslint-disable-next-line no-unused-vars
   const [errorMessage, setErrorMessage] = useState('')
 
   function handleCredentialChange(e) {
@@ -14,7 +15,7 @@ function UserForm(props) {
   }
 
   return (
-    <div>
+    <div className="user-form">
       <form onChange={handleCredentialChange}>
         <label htmlFor="user-input-first-name">First name: </label>
         <input
